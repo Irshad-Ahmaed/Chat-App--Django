@@ -1,0 +1,16 @@
+{% extends "layout.html" %} {% block content %}
+<h1 class="text-center text-gray-700 text-3xl font-semibold">
+    Logged out
+</h1>
+
+<p>
+  You have been Logged out
+  <a
+    class="text-center text-orange-400 hover:underline transition-all"
+    href='{% url "register_User" %}'
+  >
+    Login here</a
+  >
+</p>
+
+{% endblock %}

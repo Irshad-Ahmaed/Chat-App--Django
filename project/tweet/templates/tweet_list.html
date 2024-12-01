@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class='w-full relative'>
+        <h1 class='text-center text-gray-700 text-3xl font-semibold'>Welcome To Tweets App</h1>
+        <a class='w-full' href='{% url "tweet_create" %}'>
+            <button class='bg-green-500 mx-48 mt-16 rounded-md px-4 py-2 hover:bg-green-600 transition-all text-white'>Create <span class='font-bold'>+</span></button>
+        </a>
+        <div class='w-full px-48 mt-10 flex flex-wrap gap-5'>
+        {% for tweet in tweets %}
+            <div class='flex flex-col gap-2 bg-gray-400 rounded-lg hover:shadow-gray-500 hover:shadow-lg transition-all'>
+                <div>
+                    <img src="{{tweet.photo.url}}" alt='photo' class='w-72 rounded-t-lg' />
+                </div>
+                <div class='m-2 text-white cursor-default'>
+                    <h2>User: <span class='text-blue-900'>{{ tweet.user.username }}</span></h2>
+                    <p class='mt-2'>Tweet: <span class='text-blue-900'>{{ tweet.text }}</span></p>
+                </div>
+                
+                {% if tweet.user == user %}
+                <div class='flex justify-center items-center gap-5 mb-2 text-white'>
+                    <a href='{% url "tweet_edit" tweet.id %}'>
+                        <button class='bg-blue-500 rounded-md px-4 py-2 hover:bg-blue-600 transition-all'>Edit</button>
+                    </a>
+                    <a href='{% url "tweet_delete" tweet.id %}'>
+                        <button class='bg-red-500 rounded-md px-4 py-2 hover:bg-red-600 transition-all'>Delete</button>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

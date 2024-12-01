@@ -1,0 +1,23 @@
+{% extends "layout.html" %} {% block content %}
+<h1 class="text-center text-gray-700 text-3xl font-semibold">
+  {% if form.instance.pk %}Edit {% else %} Create {% endif %} Tweets
+</h1>
+<form method="post" enctype="multipart/form-data" class='flex flex-col items-center mt-10'>
+  {% csrf_token %}
+  <div class='bg-gray-500 flex flex-col rounded-lg p-5 text-white shadow-md'>
+    <div class='flex flex-col gap-2 text-black'>
+        <label class='text-white'>Text:</label>
+        {{form.text}}
+    </div>
+
+    <label class='mt-5 mb-2'>Photo:</label>
+    <div class='border rounded-lg w-fit border-white p-2 hover:bg-gray-400'>
+        {{form.photo}}
+    </div>
+
+    <button type='submit' class='bg-blue-500 rounded-md my-5 px-4 py-2 hover:bg-blue-600 transition-all'>Add Tweet</button>
+    <a class='text-center hover:underline hover:text-blue-500' href='{% url "show_tweet" %}'> < back to tweet list</a>
+  </div>
+</form>
+
+{% endblock %}
