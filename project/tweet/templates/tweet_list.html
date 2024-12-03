@@ -2,19 +2,25 @@
 
 {% block content %}
     <div class='w-full relative'>
-        <h1 class='text-center text-gray-700 text-3xl font-semibold'>Welcome To Tweets App</h1>
-        <a class='w-full' href='{% url "tweet_create" %}'>
-            <button class='bg-green-500 mx-48 mt-16 rounded-md px-4 py-2 hover:bg-green-600 transition-all text-white'>Create <span class='font-bold'>+</span></button>
-        </a>
+        <h1 class='text-center text-gray-700 text-3xl font-semibold'>Welcome To Tweet App</h1>
+        <div class='flex gap-5 max-w-screen-lg items-center mx-48 justify-between mt-16'>
+            <a class='' href='{% url "tweet_create" %}'>
+                <button class='bg-green-500 rounded-md px-4 py-2 hover:bg-green-600 transition-all text-white'>Create <span class='font-bold'>+</span></button>
+            </a>
+            <form method="get" class='' action="{% url 'search' %}">
+                {{ form.query }}
+                <button type="submit" class='bg-blue-500 rounded-md px-4 py-2 hover:bg-blue-600 transition-all text-white'>Search</button>
+            </form>
+        </div>
         <div class='w-full px-48 mt-10 flex flex-wrap gap-5'>
         {% for tweet in tweets %}
-            <div class='flex flex-col gap-2 bg-gray-400 rounded-lg hover:shadow-gray-500 hover:shadow-lg transition-all'>
+            <div class='flex flex-col gap-2 shadow-md bg-gray-400 rounded-lg hover:shadow-gray-500 hover:shadow-lg transition-all'>
                 <div>
                     <img src="{{tweet.photo.url}}" alt='photo' class='w-72 rounded-t-lg' />
                 </div>
                 <div class='m-2 text-white cursor-default'>
-                    <h2>User: <span class='text-blue-900'>{{ tweet.user.username }}</span></h2>
-                    <p class='mt-2'>Tweet: <span class='text-blue-900'>{{ tweet.text }}</span></p>
+                    <h2><span class='text-red-700'>{{ tweet.user.username }}</span></h2>
+                    <p class='mt-2'><span class='text-blue-900'>{{ tweet.text }}</span></p>
                 </div>
                 
                 {% if tweet.user == user %}
